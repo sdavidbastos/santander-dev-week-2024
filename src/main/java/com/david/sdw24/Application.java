@@ -3,10 +3,13 @@ package com.david.sdw24;
 import com.david.sdw24.application.AskChampionUseCase;
 import com.david.sdw24.application.ListChampionsUseCase;
 import com.david.sdw24.domain.model.ports.ChampionsRepository;
+import com.david.sdw24.domain.model.ports.GenerativeAiApiService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
+@EnableFeignClients
 @SpringBootApplication
 public class Application {
 
@@ -20,8 +23,8 @@ public class Application {
 	}
 
 	@Bean
-	public AskChampionUseCase askChampionUseCase(ChampionsRepository repository){
-		return new AskChampionUseCase(repository);
+	public AskChampionUseCase askChampionUseCase(ChampionsRepository repository, GenerativeAiApiService generativeAiApiService){
+		return new AskChampionUseCase(repository, generativeAiApiService);
 	}
 
 }
